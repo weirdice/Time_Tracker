@@ -2,6 +2,8 @@
 
 Goal of this project is to create an app for tracking time spent on multiple tasks and then give aggregate times rounded to the nearest n minutes at the end.
 
+*Base functionality of app complete but working in terminal without a GUI*
+
 ### Learning Goals:
 
 - Making a GUI with python
@@ -25,7 +27,7 @@ Goal of this project is to create an app for tracking time spent on multiple tas
     - Testing mode: *counts seconds instead of minutes*
 
 ## BACKGROUND FEATURES
-- [ ] Saving data for settings
-- [ ] Saving log for current day
-- [ ] Rounding algorithm for rounding **total** time up and then rounding task times to sum to rounded total.
-- [ ] System for recovery if app is closed mid-day
+- [x] Saving data for settings
+- [x] Saving log for current day
+- [x] Rounding algorithm for rounding **total** time up and then rounding task times to sum to rounded total.
+- [x] System for recovery if app is closed mid-day
