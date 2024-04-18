@@ -4,7 +4,7 @@ import pickle
 from dataclasses import dataclass
 from time import time
 
-# Global constants
+# MARK: Global constants
 WELCOME_SCREEN = int(0)
 SETTINGS_SCREEN = int(1)
 WORK_SCREEN = int(2)
@@ -23,6 +23,7 @@ class SaveData:
     time_records: dict[int, str]
 
 
+# MARK: Save/Load
 def save_data(data: SaveData) -> None:
     """Function to save user data to binary file"""
     with open("save_state", "wb") as f:
@@ -56,6 +57,7 @@ def add_timestamp(task_name: str, data: SaveData) -> SaveData:
     return data
 
 
+# MARK: Timing Calculations
 def round_mins(number: int, rounding_value: int) -> int:
     """rounds number to the nearest multiple of rounding_value"""
     return int(number / rounding_value) * rounding_value
@@ -106,6 +108,7 @@ def summary_timings(data: SaveData) -> tuple[int, list[tuple[str, int]], int]:
     return (total_time, sum_durations, break_time)
 
 
+# MARK: Filter Inputs
 def get_num(prompt: str) -> float:
     """Converts user input into an int if possible"""
     while True:
@@ -126,6 +129,7 @@ def get_bool(prompt: str) -> bool:
             print("Incorrect input please enter 'true' or 'false'")
 
 
+# MARK: Welcome Prompt
 def welcome_prompt(data: SaveData) -> tuple[int, SaveData]:
     """Print instructions for navigating main menu and move accordingly"""
     print("Welcome to Time Tracking.")
@@ -162,6 +166,7 @@ def welcome_prompt(data: SaveData) -> tuple[int, SaveData]:
             return WORK_SCREEN, add_timestamp(input_str, data)
 
 
+# MARK: Settings Prompt
 def settings_prompt(data: SaveData) -> tuple[int, SaveData]:
     """Menu for changing app settings"""
     print("Settings:\nto return to main type 'EXIT'")
@@ -189,6 +194,7 @@ def settings_prompt(data: SaveData) -> tuple[int, SaveData]:
             return SETTINGS_SCREEN, data
 
 
+# MARK: Work Prompt
 def work_prompt(data: SaveData) -> tuple[int, SaveData]:
     """prompt for tracking time, options are to type a task to start, 'break', or return to main menu"""
     work_time, work_list, break_time = summary_timings(data)
@@ -215,6 +221,7 @@ def work_prompt(data: SaveData) -> tuple[int, SaveData]:
             return WORK_SCREEN, add_timestamp(input_str, data)
 
 
+# MARK: Main
 def main():
     """main function"""
     current_screen = WELCOME_SCREEN
