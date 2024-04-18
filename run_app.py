@@ -147,15 +147,17 @@ def welcome_prompt(data: SaveData) -> tuple[int, SaveData]:
             return SETTINGS_SCREEN, data
         case "summary":
             # Print Summary
-            details = summary_timings(data)
+            work_time, work_list, break_time = summary_timings(data)
             print(
-                f"\nTotal time working: {details[0]} {UNIT_NAME[data.test_mode]} \nDetails:"
+                f"\nTotal time working: {work_time} {UNIT_NAME[data.test_mode]} \nDetails:"
             )
-            for x in details[1]:
+            for x in work_list:
                 print(f"     {x[0]}: {x[1]} {UNIT_NAME[data.test_mode]}")
-            print(f"Time on breaks: {details[2]} {UNIT_NAME[data.test_mode]}\n")
+            print(f"Time on breaks: {break_time} {UNIT_NAME[data.test_mode]}\n")
 
             return WELCOME_SCREEN, data
+        case "break":
+            return WORK_SCREEN, add_timestamp("BREAK", data)
         case _:
             return WORK_SCREEN, add_timestamp(input_str, data)
 
